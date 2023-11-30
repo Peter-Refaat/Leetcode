@@ -1,0 +1,15 @@
+class Solution {
+public:
+    vector<int> intersection(vector<int>& nums1, vector<int>& nums2) 
+    {
+        sort(nums1.begin(),nums1.end());
+        sort(nums2.begin(),nums2.end());
+        vector<int>res(nums1.size()+nums2.size());
+        vector<int>::iterator it;
+        it = set_intersection(nums1.begin(),nums1.end(),nums2.begin(),nums2.end(),res.begin());
+        res.resize(it - res.begin());
+        res.erase(it, res.end());
+        res.erase(unique(res.begin(), res.end()), res.end());
+        return res;
+    }
+};
