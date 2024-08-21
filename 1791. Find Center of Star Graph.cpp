@@ -4,7 +4,7 @@ public:
         map<int,int>freq;
         for(int i = 0 ; i < edges.size() ; ++i)
         {
-            for(int j = 0 ; j < edges[1].size() ; ++j)
+            for(int j = 0 ; j < edges[i].size() ; ++j)
             {
                 freq[edges[i][j]]++;
             }
