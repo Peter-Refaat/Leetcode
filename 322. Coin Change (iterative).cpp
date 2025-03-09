@@ -1,9 +1,8 @@
-#define ll long long
 class Solution {
 public:
     int coinChange(vector<int>& coins, int amount) {
         int n = coins.size();
-        vector<ll> dp(amount+1,1e9);
+        vector<int> dp(amount+1,1e9);
         dp[amount] = 0;
         for(auto& c : coins)
         {
