@@ -1,28 +1,36 @@
 class Solution {
 public:
-    vector<int> mergeSort(int l , int r , vector<int>& nums)
+    void combine(int l, int mid , int r, vector<int>& nums)
     {
         if(l==r)
-            return {nums[l]};
-        int m = l+r>>1;
-        vector<int>left = mergeSort(l,m,nums);
-        vector<int>right = mergeSort(m+1,r,nums);
-        int p1 = 0 , p2 = 0;
-        vector<int>ret;
-        while(p1 < left.size() and p2 < right.size())
+            return;
+        int lo = l , hi = mid+1 , idx = 0;
+        vector<int>sorted(r-l+1);
+        while(lo <= mid and hi <= r)
         {
-            if(left[p1] <= right[p2])
-                ret.push_back(left[p1++]);
-            else ret.push_back(right[p2++]);
+            if(nums[lo] <= nums[hi])
+                sorted[idx++] = nums[lo++];
+            else sorted[idx++] = nums[hi++];
         }
-        while(p1 < left.size())
-            ret.push_back(left[p1++]);
-        while(p2 < right.size())
-            ret.push_back(right[p2++]);
-        return ret;
+        while(lo <= mid)
+            sorted[idx++] = nums[lo++];
+        while(hi <= r)
+            sorted[idx++] = nums[hi++];
+        for(int k = 0; k < r-l+1 ; ++k)
+            nums[l + k] = sorted[k];
+    }
+    void mergeSort(int l , int r , vector<int>& nums)
+    {
+        if(l==r)
+            return;
+        int mid = l+r>>1;
+        mergeSort(l,mid,nums);
+        mergeSort(mid+1,r,nums);
+        combine(l,mid,r,nums);
     }
     vector<int> sortArray(vector<int>& nums)
     {
-        return mergeSort(0,nums.size()-1,nums);
+        mergeSort(0,nums.size()-1,nums);
+        return nums;
     }
 };
