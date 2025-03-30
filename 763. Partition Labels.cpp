@@ -1,12 +1,13 @@
 class Solution {
 public:
     vector<int> partitionLabels(string s) {
-        map<char,int>mp;
-        for(int i = 0 ; i < s.size() ; ++i)
+        unordered_map<char,int>mp;
+        int n = s.size();
+        for(int i = 0 ; i < n ; ++i)
             mp[s[i]] = i;
         int lst = mp[s[0]] , cur = 1;
         vector<int>ans;
-        for(int i = 1 ; i < s.size() ; ++i)
+        for(int i = 1 ; i < n ; ++i)
         {
             if(lst < i)
             {
