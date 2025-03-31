@@ -1,5 +1,6 @@
 class Solution {
 public:
+    // O(N^2)
     int lengthOfLIS(vector<int>& nums) {
         int n = nums.size();
         vector<int>dp(n,1);
@@ -15,5 +16,22 @@ public:
             ans = max(ans,dp[i]);
         }
         return ans;
+    }
+    //O(Nlg(N))
+    int lengthOfLIS(vector<int>& nums) {
+        int n = nums.size();
+        vector<int>lis;
+        for(int i = 0 ; i < n ; ++i)
+        {
+            if(lis.empty())
+                lis.push_back(nums[i]);
+            else if(nums[i] <= lis.back())
+            {
+                auto idx = lower_bound(lis.begin(),lis.end(),nums[i]) - lis.begin();
+                lis[idx] = nums[i];
+            }
+            else lis.push_back(nums[i]);
+        }
+        return lis.size();
     }
 };
